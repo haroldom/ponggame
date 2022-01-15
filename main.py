@@ -207,7 +207,7 @@ def main(screen):
         clock.tick(60)
 
 def draw_winner(winner):
-    global score_player1, score_player2
+    global score_player1, score_player2, margin_top_player1, margin_top_player2
     screen.fill(BLACK)
     #Dibujar en pantalla el nombre del ganador
     text_win = pygame.font.SysFont('Console', 30, True)
@@ -216,6 +216,8 @@ def draw_winner(winner):
 
     score_player1 = 0
     score_player2 = 0
+    margin_top_player1 = s_height/2-(105/2)
+    margin_top_player2 = s_height/2-(105/2)
 
 
     #Actualizar pantalla
