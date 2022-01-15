@@ -49,10 +49,6 @@ def mov_bars(y):
     speed_y_player1 = y
     margin_top_player1 -= y
 
-
-def draw_bars(screen):
-    pass
-
 def main(screen):
     global margin_top_player1,player1_speed,margin_top_player2,player2_speed, ball_coord_x, ball_coord_y, ball_speed_x, ball_speed_y, score_player1,score_player2
     collision_down = False
@@ -123,6 +119,9 @@ def main(screen):
             ball_coord_y = s_height/2-5
             collision_right = False
             score_player1 += 1
+            margin_top_player1 = s_height/2-(105/2)
+            margin_top_player2 = s_height/2-(105/2)
+            
 
         # Detectar colisión con la parte izquierda del screen
         if ball_coord_x <= 5:
@@ -135,7 +134,8 @@ def main(screen):
             ball_coord_y = s_height/2-5
             collision_left = False
             score_player2 += 1
-
+            margin_top_player1 = s_height/2-(105/2)
+            margin_top_player2 = s_height/2-(105/2)
 
         # Detectar colisión con la parte superior del screen
         if ball_coord_y <= 5:
@@ -158,10 +158,10 @@ def main(screen):
         player2 = pygame.draw.rect(screen, WHITE, (s_width-40,margin_top_player2, 10, 105))
 
         # Dibujar linea central (Cada cuadradito tendrá: 21 = s_height; 6= s_width: Con un margin superior de 4px)
-        rect_center_top = 10
-        for i in range(18): # 28 cuadraditos
-            pygame.draw.rect(screen, WHITE, (s_width/2-(6/2),rect_center_top, 6, 21))
-            rect_center_top += 40
+        rect_center_top = 0
+        for i in range(35): # 28 cuadraditos
+            pygame.draw.rect(screen, WHITE, (s_width/2-(6/2),rect_center_top, 2, 21))
+            rect_center_top += 21
         
         # Dibujamos el balón
         ball = pygame.draw.circle(screen, WHITE, (ball_coord_x, ball_coord_y), 10)
