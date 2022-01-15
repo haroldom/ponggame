@@ -1,5 +1,6 @@
 import pygame, sys
 
+
 pygame.init()
 
 size = (1058,725)
@@ -184,12 +185,44 @@ def main(screen):
         screen.blit(score_p1,(350,10))
         score_p2 = text_score_p1.render(str(score_player2),1,(255,255,255))
         screen.blit(score_p2,(850,10))
+
+        if score_player1 == 3:
+            draw_winner("Player 1")
+            # text_win_player1 = text_win_p1.render("Win", 1,(255,255,255))
+            # screen.blit(text_win_player1,(350, 100))
+            # time.sleep(5)
+            # break
+        elif score_player2 == 3:
+            draw_winner("Player 2")
+
+            # text_win_player2 = text_win_p2.render("Win", 1,(255,255,255))
+            # screen.blit(text_win_player2,(850,100))
+            # time.sleep(5)
+            # break
         ## ----- ZONA DE DIBUJO
 
         #Actualizar pantalla
         pygame.display.flip()
         #Controlamos los FPD
         clock.tick(60)
+
+def draw_winner(winner):
+    global score_player1, score_player2
+    screen.fill(BLACK)
+    #Dibujar en pantalla el nombre del ganador
+    text_win = pygame.font.SysFont('Console', 30, True)
+    text_win_screen = text_win.render("Winner: "+str(winner),1,(255,255,255))
+    screen.blit(text_win_screen,(s_width/2,100))
+
+    score_player1 = 0
+    score_player2 = 0
+
+
+    #Actualizar pantalla
+    pygame.display.flip()
+    #Controlamos los FPD
+    clock.tick(60)
+    pygame.time.delay(1500)
 
 
 def main_menu(screen):
