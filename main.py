@@ -20,6 +20,10 @@ player2_speed = 0
 score_player2 = 0
 text_score_p2 = pygame.font.SysFont('Console', 30, True)
 
+# Creamos una variable para el sonido del rebote del balón
+sound_pong = pygame.mixer.Sound("pong.ogg")
+# Creamos una variable para el sonido del score
+score_pong = pygame.mixer.Sound("score.ogg")
 
 # Para el balón, coordenadas y velocidad:
 ball_coord_x = s_width/2
@@ -114,6 +118,7 @@ def main(screen):
         if collision_right != True:
             ball_coord_x += ball_speed_x
         elif collision_right == True:
+            score_pong.play()
             ball_coord_x = s_width/2
             ball_coord_y = s_height/2-5
             collision_right = False
@@ -125,6 +130,7 @@ def main(screen):
         if collision_left != True:
             ball_coord_x += ball_speed_x
         elif collision_left == True:
+            score_pong.play()
             ball_coord_x = s_width/2
             ball_coord_y = s_height/2-5
             collision_left = False
@@ -166,18 +172,26 @@ def main(screen):
         if ball.colliderect(player2) and ball_speed_x > 0:
             if abs(ball.right - player2.left) < 10:
                 ball_speed_x *= -1
+                sound_pong.play()
             elif abs(ball.top - player2.bottom) < 10 and ball_speed_y < 0:
                 ball_speed_y *= -1
+                sound_pong.play()
+
             elif abs(ball.bottom - player2.top) < 10 and ball_speed_y > 0:
                 ball_speed_y *= -1
+                sound_pong.play()
+
         
         if ball.colliderect(player1) and ball_speed_x < 0:
             if abs(ball.left - player1.right) < 10:
                 ball_speed_x *= -1
+                sound_pong.play()
             elif abs(ball.top - player1.bottom) < 10:
                 ball_speed_y *= -1
+                sound_pong.play()
             elif abs(ball.bottom - player1.top) < 10:
                 ball_speed_y *= -1
+                sound_pong.play()
 
 
         # Dibujamos el marcador:
@@ -186,13 +200,13 @@ def main(screen):
         score_p2 = text_score_p1.render(str(score_player2),1,(255,255,255))
         screen.blit(score_p2,(850,10))
 
-        if score_player1 == 3:
+        if score_player1 == 10:
             draw_winner("Player 1")
             # text_win_player1 = text_win_p1.render("Win", 1,(255,255,255))
             # screen.blit(text_win_player1,(350, 100))
             # time.sleep(5)
             # break
-        elif score_player2 == 3:
+        elif score_player2 == 10:
             draw_winner("Player 2")
 
             # text_win_player2 = text_win_p2.render("Win", 1,(255,255,255))
